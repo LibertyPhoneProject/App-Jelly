@@ -35,6 +35,7 @@ import android.net.http.HttpResponseCache
 import android.os.*
 import android.print.PrintAttributes
 import android.print.PrintManager
+import android.text.SpannableStringBuilder
 import android.text.TextUtils
 import android.util.Log
 import android.view.*
@@ -78,6 +79,8 @@ import org.lineageos.jelly.webview.WebViewExtActivity
 import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
+import java.util.*
+import kotlin.system.exitProcess
 
 class MainActivity : WebViewExtActivity(), SearchBarController.OnCancelListener,
         SharedPreferences.OnSharedPreferenceChangeListener {
@@ -175,6 +178,27 @@ class MainActivity : WebViewExtActivity(), SearchBarController.OnCancelListener,
         PreferenceManager.setDefaultValues(this, R.xml.settings, false)
         val preferenceManager = PreferenceManager.getDefaultSharedPreferences(this)
         preferenceManager.registerOnSharedPreferenceChangeListener(this)
+        val prefs = PreferenceManager.getDefaultSharedPreferences(this)
+
+        val timerTextView = findViewById<AutoCompleteTextView>(R.id.url_timer)
+        val mainHandler = Handler(Looper.getMainLooper())
+        val closeTime = Calendar.getInstance().getTimeInMillis() + PrefsUtils.getTimeout(this) * 60 * 1000
+        mainHandler.post(object : Runnable {
+            override fun run() {
+                val timeLeft = closeTime - Calendar.getInstance().getTimeInMillis();
+                if (timeLeft <= 0) {
+                    this@MainActivity.finish()
+                    exitProcess(0)
+                }
+                val minutes = timeLeft / 1000 / 60
+                val seconds = (timeLeft / 1000 % 60).toString().padStart(2, '0')
+                if (minutes > 0)
+                    timerTextView.text = SpannableStringBuilder("$minutes:$seconds")
+                else
+                    timerTextView.text = SpannableStringBuilder("$seconds")
+                mainHandler.postDelayed(this, 1000)
+            }
+        })
 
         val incognitoIcon = findViewById<ImageView>(R.id.incognito)
         incognitoIcon.visibility = if (mIncognito) View.VISIBLE else View.GONE
