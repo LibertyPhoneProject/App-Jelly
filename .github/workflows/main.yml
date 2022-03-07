@@ -3,10 +3,10 @@ name: APK Builder
 on:
   push:
     branches:
-      - master
+      - lineage-18.1
   pull_request:
     branches:
-      - master
+      - lineage-18.1
 
 jobs:
   build:
