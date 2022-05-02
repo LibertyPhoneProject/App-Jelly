@@ -19,11 +19,13 @@
         android:id="@+id/menu_new"
         android:icon="@drawable/ic_new_tab"
         android:title="@string/menu_new_tab"
+        android:visible="false"
         app:showAsAction="never" />
     <item
         android:id="@+id/menu_incognito"
         android:icon="@drawable/ic_incognito"
         android:title="@string/menu_incognito"
+        android:visible="false"
         app:showAsAction="never" />
     <item
         android:id="@+id/menu_reload"
@@ -34,6 +36,7 @@
         android:id="@+id/menu_add_favorite"
         android:icon="@drawable/ic_favorite_add"
         android:title="@string/menu_fav_add"
+        android:visible="false"
         app:showAsAction="never" />
     <item
         android:id="@+id/menu_share"
@@ -49,6 +52,7 @@
         android:id="@+id/menu_favorite"
         android:icon="@drawable/ic_favorite"
         android:title="@string/menu_favorites"
+        android:visible="false"
         app:showAsAction="never" />
     <item
         android:id="@+id/menu_history"
@@ -59,6 +63,7 @@
         android:id="@+id/menu_shortcut"
         android:icon="@drawable/ic_shortcut"
         android:title="@string/menu_shortcut"
+        android:visible="false"
         app:showAsAction="never" />
     <item
         android:id="@+id/menu_print"

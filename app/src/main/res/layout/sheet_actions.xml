@@ -23,6 +23,7 @@
 
     <LinearLayout
         android:id="@+id/sheet_new_tab"
+        android:visibility="gone"
         style="@style/AppTheme.BottomSheetLayout">
 
         <ImageView
@@ -63,7 +64,7 @@
     <LinearLayout
         android:id="@+id/sheet_download"
         style="@style/AppTheme.BottomSheetLayout"
-        android:visibility="gone">
+        android:visible="false">
 
         <ImageView
             style="@style/AppTheme.BottomSheetIcon"

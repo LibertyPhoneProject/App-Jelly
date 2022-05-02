@@ -83,6 +83,8 @@
     <string name="pref_start_page_dialog_reset">Reset</string>
     <!-- Settings: privacy and security category -->
     <string name="pref_privacy_security">Privacy &amp; security</string>
+    <!-- Settings: timeout preference title -->
+    <string name="pref_timeout">Timeout for browsing</string>
     <!-- Settings: lookLock title -->
     <string name="pref_looklock_title">LookLock</string>
     <!-- Settings: lookLock summary -->

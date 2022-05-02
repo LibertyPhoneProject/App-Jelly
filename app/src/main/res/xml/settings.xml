@@ -35,6 +35,14 @@
         android:key="key_home_page"
         android:title="@string/pref_start_page" />
 
+    <ListPreference
+        android:defaultValue="5"
+        android:entries="@array/pref_timeout_entries"
+        android:entryValues="@array/pref_timeout_entryvalues"
+        android:key="key_timeout"
+        android:summary="%s"
+        android:title="@string/pref_timeout" />
+
     <SwitchPreference
         android:defaultValue="0"
         android:key="key_advanced_share"

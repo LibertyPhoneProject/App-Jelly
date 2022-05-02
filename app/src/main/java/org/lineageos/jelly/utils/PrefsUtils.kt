@@ -29,6 +29,7 @@ object PrefsUtils {
     private const val KEY_COOKIE = "key_cookie"
     private const val KEY_DO_NOT_TRACK = "key_do_not_track"
     private const val KEY_SUGGESTION_PROVIDER = "key_suggestion_provider"
+    private const val KEY_TIMEOUT = "key_timeout"
     fun getSearchEngine(context: Context): String {
         val prefs = PreferenceManager.getDefaultSharedPreferences(context)
         return prefs.getString(KEY_SEARCH_ENGINE,
@@ -79,6 +80,11 @@ object PrefsUtils {
         } catch (ignored: IllegalArgumentException) {
             SuggestionProviderType.NONE
         }
+    }
+
+    fun getTimeout(context: Context): Int {
+        val prefs = PreferenceManager.getDefaultSharedPreferences(context)
+        return Integer.parseInt(prefs.getString(KEY_TIMEOUT, "5"))
     }
 
     fun setHomePage(context: Context, value: String?) {

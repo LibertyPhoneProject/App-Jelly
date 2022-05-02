@@ -45,7 +45,10 @@
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
+                <!--
+                We want to remove the browser icon from the launcher, but re-add
+                this line if we need to debug from Android studio
+                <category android:name="android.intent.category.LAUNCHER" />-->
             </intent-filter>
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
