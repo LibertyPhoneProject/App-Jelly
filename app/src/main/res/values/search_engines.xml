@@ -34,4 +34,18 @@
         <item>https://search.yahoo.com/p={searchTerms}</item>
         <item>https://yandex.com/?q={searchTerms}</item>
     </string-array>
+
+    <string-array name="pref_timeout_entries">
+        <item>1 Minute</item>
+        <item>3 Minutes</item>
+        <item>5 Minutes</item>
+        <item>10 Minutes</item>
+    </string-array>
+
+    <string-array name="pref_timeout_entryvalues" translatable="false">
+        <item>1</item>
+        <item>3</item>
+        <item>5</item>
+        <item>10</item>
+    </string-array>
 </resources>

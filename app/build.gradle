@@ -35,6 +35,10 @@ android {
     lint {
         disable 'RestrictedApi'
     }
+    lintOptions {
+        disable 'RestrictedApi'
+        abortOnError false
+    }
 }
 
 dependencies {
