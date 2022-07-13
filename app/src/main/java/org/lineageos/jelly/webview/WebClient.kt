@@ -56,7 +56,23 @@ internal class WebClient(private val mUrlBarController: UrlBarController) : WebV
     override fun shouldOverrideUrlLoading(view: WebView, request: WebResourceRequest): Boolean {
         if (request.isForMainFrame) {
             val webViewExt = view as WebViewExt
-            val url = request.url.toString()
+            val context = view.context
+            var url = request.url.toString()
+            if (url.startsWith("intent://")) {
+                val intent = Intent.parseUri(url, Intent.URI_INTENT_SCHEME)
+                if (intent != null) {
+                    val packageName = intent.getPackage()
+                    if (packageName != null
+                        && context.packageManager.resolveActivity(intent, 0) == null) {
+                        val fallbackUrl = intent.getStringExtra("browser_fallback_url")
+                        if (fallbackUrl != null) {
+                            url = fallbackUrl
+                            webViewExt.followUrl(url)
+                            return true
+                        }
+                    }
+                }
+            }
             val needsLookup = (request.hasGesture()
                     || !TextUtils.equals(url, webViewExt.lastLoadedUrl))
             if (!webViewExt.isIncognito
@@ -116,10 +132,9 @@ internal class WebClient(private val mUrlBarController: UrlBarController) : WebV
             val packageName = intent.getPackage()
             if (packageName != null
                     && context.packageManager.resolveActivity(intent, 0) == null) {
-                // Explicit intent, but app is not installed - try to redirect to Play Store
-                val storeUri = Uri.parse("market://search?q=pname:$packageName")
-                intent = Intent(Intent.ACTION_VIEW, storeUri)
-                        .addCategory(Intent.CATEGORY_BROWSABLE)
+                val fallbackUrl = intent.getStringExtra("browser_fallback_url")
+                if (fallbackUrl != null)
+                    intent = Intent.parseUri(fallbackUrl, Intent.URI_INTENT_SCHEME)
             }
         }
         try {
